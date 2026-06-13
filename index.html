@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-         <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Status Nepal is a lightweight Nepali news website covering breaking, trending, politics, celebrity, viral, and technology news."
-/>
-    <meta name="keywords" content="Status Nepal, Nepal news, Nepali news, politics, celebrity, viral, technology" />
+      content="Status Nepal is a lightweight Nepali news website covering breaking, trending, politics, celebrity, viral, sports, and technology news."
+    />
+    <meta name="keywords" content="Status Nepal, Nepal news, Nepali news, politics, celebrity, viral, sports, technology" />
     <meta name="author" content="Status Nepal" />
     <link rel="canonical" href="./" />
     <meta property="og:site_name" content="Status Nepal" />
@@ -28,7 +28,23 @@
     <title>Status Nepal - Nepali News Portal</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <button type="submit">Search</button>
+  <body>
+    <header class="site-header">
+      <div class="topbar">
+        <span id="today"></span>
+        <span>Independent Digital News</span>
+      </div>
+
+      <div class="masthead">
+        <a class="logo" href="#home" aria-label="Status Nepal home">
+          <span>SN</span>
+          <strong>Status Nepal</strong>
+        </a>
+
+        <form class="search" id="searchForm" role="search">
+          <label for="searchInput">Search news</label>
+          <input id="searchInput" type="search" placeholder="Search news..." />
+          <button type="submit">Search</button>
         </form>
 
         <button class="mode-btn" id="modeBtn" type="button">Dark</button>
@@ -43,6 +59,7 @@
           <li><a href="#latest">Latest</a></li>
           <li><a href="#categories">Categories</a></li>
           <li><a href="#article">Article</a></li>
+          <li><a href="#share">Share</a></li>
           <li><a href="#video">Video</a></li>
         </ul>
       </nav>
@@ -56,14 +73,14 @@
 
       <section class="hero">
         <article class="lead" id="leadNews"></article>
-<li><a href="#latest">Latest</a></li>
-          <li><a href="#categories">Categories</a></li>
-          <li><a href="#article">Article</a></li>
-          <li><a href="#share">Share</a></li>
-          <li><a href="#video">Video</a></li>
-        </ul>
-      </nav>
-        <p>Fresh updates from Nepal and around the world.</p>
+        <aside class="side-news" id="sideNews"></aside>
+      </section>
+
+      <section class="layout">
+        <div>
+          <div class="section-title" id="latest">
+            <h2>Latest News</h2>
+            <p>Fresh updates from Nepal and around the world.</p>
           </div>
           <div class="news-grid" id="latestGrid"></div>
         </div>
@@ -77,12 +94,13 @@
       <section class="categories" id="categories">
         <div class="section-title">
           <h2>Categories</h2>
-          <p>Browse politics, celebrity, viral, and technology stories.</p>
+          <p>Browse politics, celebrity, viral, sports, and technology stories.</p>
         </div>
         <div class="tabs" id="categoryTabs">
           <button class="active" type="button" data-category="Politics">Politics</button>
           <button type="button" data-category="Celebrity">Celebrity</button>
           <button type="button" data-category="Viral">Viral</button>
+          <button type="button" data-category="Sports">Sports</button>
           <button type="button" data-category="Technology">Technology</button>
         </div>
         <div class="news-grid" id="categoryGrid"></div>
@@ -96,31 +114,26 @@
         <article class="article-card" id="articleView"></article>
       </section>
 
-          <button class="active" type="button" data-category="Politics">Politics</button>
-          <button type="button" data-category="Celebrity">Celebrity</button>
-          <button type="button" data-category="Viral">Viral</button>
-          <button type="button" data-category="Sports">Sports</button>
-          <button type="button" data-category="Technology">Technology</button>
+      <section class="video-section" id="video">
+        <div class="section-title">
+          <h2>Video News</h2>
+          <p>Featured YouTube report from Status Nepal.</p>
         </div>
-        <div class="news-grid" id="categoryGrid"></div>
-      <img src="eut20.jfif">
-          
-          <h3 style="font-size: 1.3rem; color: var(--red); margin-bottom: 15px;">के आज मौसमले साथ देला?</h3>
-          
-          <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text); margin-bottom: 15px; text-align: justify;">
-            आज पनि मौसमको चुनौतीबीच जेबी ब्रुग्स मैदान उत्रँदै! ईयू टी–२० बेल्जियमको प्लेअफमा आज राति ८ः१५ बजे जेबी ब्रुग्सले एक्सेल युनाइटेड ब्रसेल्ससँग प्रतिस्पर्धा गर्दैछ। पछिल्ला तीन खेल वर्षाका कारण प्रभावित भएपछि आजको खेल निर्धारित समयमा हुन्छ कि हुँदैन भन्ने चासो बढेको छ।
-          </p>
-          <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text); text-align: justify;">
-            ब्रुग्सबाट नेपाली स्टारहरू दीपेन्द्र सिंह ऐरी, अनिलकुमार साह, गुलशन झा, ईशान पाण्डे र ललित राजवंशीको प्रदर्शनमा सबैको नजर रहनेछ।
-          </p>
-        </article>
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/ysz5S6PUM-U"
+            title="Status Nepal video news"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
       </section>
     </main>
 
     <footer class="footer">
       <strong>Status Nepal</strong>
       <p>Clean, lightweight, GitHub Pages friendly Nepali news website.</p>
-      <small>© 2026 Status Nepal. All rights reserved.</small>
+      <small>&copy; 2026 Status Nepal. All rights reserved.</small>
     </footer>
 
     <script src="script.js"></script>
