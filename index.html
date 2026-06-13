@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Status Nepal is a lightweight Nepali news website covering breaking, trending, politics, celebrity, viral, and technology news."
+    />
+    <meta name="keywords" content="Status Nepal, Nepal news, Nepali news, politics, celebrity, viral, technology" />
+    <meta name="author" content="Status Nepal" />
+    <title>Status Nepal - Nepali News Portal</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="topbar">
+        <span id="today"></span>
+        <span>Independent Digital News</span>
+      </div>
+
+      <div class="masthead">
+        <a class="logo" href="#home" aria-label="Status Nepal home">
+          <span>SN</span>
+          <strong>Status Nepal</strong>
+        </a>
+
+        <form class="search" id="searchForm" role="search">
+          <label for="searchInput">Search news</label>
+          <input id="searchInput" type="search" placeholder="Search news..." />
+          <button type="submit">Search</button>
+        </form>
+
+        <button class="mode-btn" id="modeBtn" type="button">Dark</button>
+      </div>
+
+      <nav class="nav">
+        <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false">Menu</button>
+        <ul id="menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#breaking">Breaking</a></li>
+          <li><a href="#trending">Trending</a></li>
+          <li><a href="#latest">Latest</a></li>
+          <li><a href="#categories">Categories</a></li>
+          <li><a href="#article">Article</a></li>
+          <li><a href="#video">Video</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="breaking" id="breaking">
+        <strong>Breaking</strong>
+        <p id="breakingText"></p>
+      </section>
+
+      <section class="hero">
+        <article class="lead" id="leadNews"></article>
+        <aside class="side-news" id="sideNews"></aside>
+      </section>
+
+      <section class="layout">
+        <div>
+          <div class="section-title" id="latest">
+            <h2>Latest News</h2>
+            <p>Fresh updates from Nepal and around the world.</p>
+          </div>
+          <div class="news-grid" id="latestGrid"></div>
+        </div>
+
+        <aside class="sidebar" id="trending">
+          <h2>Trending</h2>
+          <ol id="trendingList"></ol>
+        </aside>
+      </section>
+
+      <section class="categories" id="categories">
+        <div class="section-title">
+          <h2>Categories</h2>
+          <p>Browse politics, celebrity, viral, and technology stories.</p>
+        </div>
+        <div class="tabs" id="categoryTabs">
+          <button class="active" type="button" data-category="Politics">Politics</button>
+          <button type="button" data-category="Celebrity">Celebrity</button>
+          <button type="button" data-category="Viral">Viral</button>
+          <button type="button" data-category="Technology">Technology</button>
+        </div>
+        <div class="news-grid" id="categoryGrid"></div>
+      </section>
+
+      <section class="article-section" id="article">
+        <div class="section-title">
+          <h2>Article Page</h2>
+          <p>A clean article layout for manually added news.</p>
+        </div>
+        <article class="article-card" id="articleView"></article>
+      </section>
+
+      <section class="video-section" id="video">
+        <div class="section-title">
+          <h2>Video News</h2>
+          <p>Featured YouTube report from Status Nepal.</p>
+        </div>
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/ysz5S6PUM-U"
+            title="Status Nepal video news"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <strong>Status Nepal</strong>
+      <p>Clean, lightweight, GitHub Pages friendly Nepali news website.</p>
+      <small>© 2026 Status Nepal. All rights reserved.</small>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
