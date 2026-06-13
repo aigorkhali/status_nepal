@@ -6,29 +6,29 @@
     <meta
       name="description"
       content="Status Nepal is a lightweight Nepali news website covering breaking, trending, politics, celebrity, viral, and technology news."
-    />
+/>
     <meta name="keywords" content="Status Nepal, Nepal news, Nepali news, politics, celebrity, viral, technology" />
     <meta name="author" content="Status Nepal" />
+    <link rel="canonical" href="./" />
+    <meta property="og:site_name" content="Status Nepal" />
+    <meta property="og:title" content="Status Nepal - Nepali News Portal" />
+    <meta
+      property="og:description"
+      content="Breaking, trending, politics, celebrity, viral, sports, and technology news from Nepal."
+    />
+    <meta property="og:image" content="eut20.jfif" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Status Nepal - Nepali News Portal" />
+    <meta
+      name="twitter:description"
+      content="Breaking, trending, politics, celebrity, viral, sports, and technology news from Nepal."
+    />
+    <meta name="twitter:image" content="eut20.jfif" />
     <title>Status Nepal - Nepali News Portal</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="topbar">
-        <span id="today"></span>
-        <span>Independent Digital News</span>
-      </div>
-
-      <div class="masthead">
-        <a class="logo" href="#home" aria-label="Status Nepal home">
-          <span>SN</span>
-          <strong>Status Nepal</strong>
-        </a>
-
-        <form class="search" id="searchForm" role="search">
-          <label for="searchInput">Search news</label>
-          <input id="searchInput" type="search" placeholder="Search news..." />
-          <button type="submit">Search</button>
+  <button type="submit">Search</button>
         </form>
 
         <button class="mode-btn" id="modeBtn" type="button">Dark</button>
@@ -56,14 +56,14 @@
 
       <section class="hero">
         <article class="lead" id="leadNews"></article>
-        <aside class="side-news" id="sideNews"></aside>
-      </section>
-
-      <section class="layout">
-        <div>
-          <div class="section-title" id="latest">
-            <h2>Latest News</h2>
-            <p>Fresh updates from Nepal and around the world.</p>
+<li><a href="#latest">Latest</a></li>
+          <li><a href="#categories">Categories</a></li>
+          <li><a href="#article">Article</a></li>
+          <li><a href="#share">Share</a></li>
+          <li><a href="#video">Video</a></li>
+        </ul>
+      </nav>
+        <p>Fresh updates from Nepal and around the world.</p>
           </div>
           <div class="news-grid" id="latestGrid"></div>
         </div>
@@ -96,15 +96,14 @@
         <article class="article-card" id="articleView"></article>
       </section>
 
-      <section class="article-section" id="article">
-        <div class="section-title">
-          <h2>विशेष कभरेज</h2>
-          <p>ईयू टी–२० बेल्जियम प्लेअफ अपडेट</p>
+          <button class="active" type="button" data-category="Politics">Politics</button>
+          <button type="button" data-category="Celebrity">Celebrity</button>
+          <button type="button" data-category="Viral">Viral</button>
+          <button type="button" data-category="Sports">Sports</button>
+          <button type="button" data-category="Technology">Technology</button>
         </div>
-        <article class="article-card" style="background: var(--card); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 20px;">
-          <h1 style="font-size: 2rem; margin-bottom: 15px; color: var(--text);">के आजको खेल पूरा होला?</h1>
-          
-          <img src="eut20.jfif">
+        <div class="news-grid" id="categoryGrid"></div>
+      <img src="eut20.jfif">
           
           <h3 style="font-size: 1.3rem; color: var(--red); margin-bottom: 15px;">के आज मौसमले साथ देला?</h3>
           
