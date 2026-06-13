@@ -1,5 +1,16 @@
 const news = [
   {
+    id: 20,
+    title: "EU T20 Belgium live broadcast 8th to 14th June",
+    category: "Sports",
+    time: "Today",
+    image: "eut20.jfif",
+    summary: "EU T20 Belgium cricket tournament will be shown live from 8th to 14th June.",
+    body: "EU T20 Belgium cricket action is scheduled from 8th to 14th June with live broadcast coverage. Cricket fans can follow the matches through the listed TV and digital channels.",
+    trending: true,
+    breaking: true
+  },
+  {
     id: 1,
     title: "Government prepares digital service plan for local offices",
     category: "Politics",
@@ -87,17 +98,6 @@ const news = [
     trending: false,
     breaking: false
   }
-  {
-  id: 9,
-  title: "के आजको खेल पूरा होला?",
-  category: "Sports",
-  time: "आज",
-  image: "eut20.jfif",
-  summary: "आज पनि मौसमको चुनौतीबीच जेबी ब्रुग्स मैदान उत्रँदै!",
-  body: "ईयू टी–२० बेल्जियमको प्लेअफमा आज राति ८ः१५ बजे जेबी ब्रुग्सले एक्सेल युनाइटेड ब्रसेल्ससँग प्रतिस्पर्धा गर्दैछ। पछिल्ला तीन खेल वर्षाका कारण प्रभावित भएपछि आजको खेल निर्धारित समयमा हुन्छ कि हुँदैन भन्ने चासो बढेको छ। ब्रुग्सबाट नेपाली स्टारहरू दीपेन्द्र सिंह ऐरी, अनिलकुमार साह, गुलशन झा, ईशान पाण्डे र ललित राजवंशीको प्रदर्शनमा सबैको नजर रहनेछ।",
-  trending: true,
-  breaking: true
-}
 ];
 
 const leadNews = document.getElementById("leadNews");
@@ -112,6 +112,64 @@ const searchInput = document.getElementById("searchInput");
 const modeBtn = document.getElementById("modeBtn");
 const menuBtn = document.getElementById("menuBtn");
 const menu = document.getElementById("menu");
+let activeArticleId = Number(new URLSearchParams(window.location.search).get("news")) || news[0].id;
+
+function absoluteUrl(path) {
+  return new URL(path, window.location.href).href;
+}
+
+function articleUrl(id) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("news", id);
+  url.hash = "article";
+  return url.href;
+}
+
+function updateMeta(item) {
+  document.title = `${item.title} - Status Nepal`;
+  const meta = {
+    "description": item.summary,
+    "og:title": item.title,
+    "og:description": item.summary,
+    "og:image": absoluteUrl(item.image),
+    "og:url": articleUrl(item.id),
+    "twitter:title": item.title,
+    "twitter:description": item.summary,
+    "twitter:image": absoluteUrl(item.image)
+  };
+
+  Object.entries(meta).forEach(([name, content]) => {
+    const selector = name.startsWith("og:")
+      ? `meta[property="${name}"]`
+      : `meta[name="${name}"]`;
+    let tag = document.querySelector(selector);
+
+    if (!tag) {
+      tag = document.createElement("meta");
+      tag.setAttribute(name.startsWith("og:") ? "property" : "name", name);
+      document.head.appendChild(tag);
+    }
+
+    tag.setAttribute("content", content);
+  });
+}
+
+function copyText(text) {
+  if (navigator.clipboard) {
+    return navigator.clipboard.writeText(text);
+  }
+
+  const input = document.createElement("textarea");
+  input.value = text;
+  input.setAttribute("readonly", "");
+  input.style.position = "fixed";
+  input.style.left = "-9999px";
+  document.body.appendChild(input);
+  input.select();
+  document.execCommand("copy");
+  document.body.removeChild(input);
+  return Promise.resolve();
+}
 
 function card(item) {
   return `
@@ -161,6 +219,8 @@ function renderCategory(category) {
 
 function renderArticle(id) {
   const item = news.find((entry) => entry.id === Number(id)) || news[0];
+  activeArticleId = item.id;
+  updateMeta(item);
   articleView.innerHTML = `
     <img src="${item.image}" alt="${item.title}">
     <div class="article-body">
@@ -173,6 +233,17 @@ function renderArticle(id) {
       <p>${item.body}</p>
       <blockquote>Editors can update this article by editing the news array in script.js.</blockquote>
       <p>This static article design includes the essentials for a professional news page: category, time, headline, image, body text, and a readable layout.</p>
+      <div class="share-box" id="share">
+        <h3>Share this news</h3>
+        <div class="share-actions">
+          <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl(item.id))}" target="_blank" rel="noopener">Facebook</a>
+          <a class="twitter" href="https://twitter.com/intent/tweet?url=${encodeURIComponent(articleUrl(item.id))}&text=${encodeURIComponent(item.title)}" target="_blank" rel="noopener">Twitter/X</a>
+          <a class="whatsapp" href="https://api.whatsapp.com/send?text=${encodeURIComponent(`${item.title} ${articleUrl(item.id)}`)}" target="_blank" rel="noopener">WhatsApp</a>
+          <button type="button" data-share="native">Instagram/TikTok</button>
+          <button type="button" data-share="copy">Copy Link</button>
+        </div>
+        <p class="share-note">Instagram and TikTok do not provide a normal website share dialog, so use the share button on mobile or copy the link and paste it there.</p>
+      </div>
     </div>
   `;
 }
@@ -190,7 +261,31 @@ function searchNews(term) {
 document.addEventListener("click", (event) => {
   const link = event.target.closest("[data-id]");
   if (link) {
+    event.preventDefault();
     renderArticle(link.dataset.id);
+    history.replaceState(null, "", articleUrl(link.dataset.id));
+  }
+
+  const shareButton = event.target.closest("[data-share]");
+  if (shareButton) {
+    const item = news.find((entry) => entry.id === activeArticleId) || news[0];
+    const url = articleUrl(item.id);
+
+    if (shareButton.dataset.share === "native" && navigator.share) {
+      navigator.share({
+        title: item.title,
+        text: item.summary,
+        url
+      });
+      return;
+    }
+
+    copyText(url).then(() => {
+      shareButton.textContent = "Copied";
+      setTimeout(() => {
+        shareButton.textContent = shareButton.dataset.share === "copy" ? "Copy Link" : "Instagram/TikTok";
+      }, 1400);
+    });
   }
 });
 
@@ -237,4 +332,4 @@ if (localStorage.getItem("statusNepalTheme") === "dark") {
 
 renderHome();
 renderCategory("Politics");
-renderArticle(1);
+renderArticle(activeArticleId);
